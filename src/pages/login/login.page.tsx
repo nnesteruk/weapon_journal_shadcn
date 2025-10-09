@@ -10,7 +10,7 @@ import {
   Input,
   Label,
 } from "@/shared/ui";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 
 type LoginForm = {
@@ -32,6 +32,7 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data: LoginForm) => {
+    console.log(data);
     if (data.password === "123456qQ!") {
       localStorage.setItem("token", "isAuth");
       return navigate(RoutesPath.MAIN);
@@ -129,23 +130,62 @@ export const Login = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form id="login-form" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="login">Логин</Label>
-                <Input id="login" type="text" placeholder="user123" required />
+                <Controller
+                  name="login"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <Input
+                      id="login"
+                      type="text"
+                      placeholder="user123"
+                      autoFocus
+                      {...field}
+                    />
+                  )}
+                />
+                {errors.login && (
+                  <p className="text-red-600 text-center">
+                    Это поле обязательное!
+                  </p>
+                )}
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
                   <Label htmlFor="password">Пароль</Label>
                 </div>
-                <Input id="password" type="password" required />
+                <Controller
+                  name="password"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder="••••••••"
+                      {...field}
+                    />
+                  )}
+                />
+                {errors.login && (
+                  <p className="text-red-600 text-center">
+                    Это поле обязательное!
+                  </p>
+                )}
               </div>
             </div>
           </form>
         </CardContent>
         <CardFooter className="flex-col gap-2">
-          <Button type="submit" className="w-full">
+          <Button
+            form="login-form"
+            type="submit"
+            className="w-full bg-blue-600 hover:bg-blue-500 active:bg-blue-700 cursor-pointer"
+          >
             Войти
           </Button>
         </CardFooter>
