@@ -21,10 +21,15 @@ export const FormItemContext = React.createContext<{ id: string }>(
 export const useFormField = () => {
   const fieldContext = React.useContext(FormFieldContext);
   const itemContext = React.useContext(FormItemContext);
+
   const { getFieldState } = useFormContext();
+
   const formState = useFormState({ name: fieldContext.name });
+
   const fieldState = getFieldState(fieldContext.name, formState);
+
   const { id } = itemContext;
+
   return {
     id,
     name: fieldContext.name,

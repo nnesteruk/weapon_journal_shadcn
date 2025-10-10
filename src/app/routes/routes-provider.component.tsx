@@ -1,6 +1,6 @@
+import { Layout } from "@/layout";
 import { Login } from "@/pages/login";
 import { RoutesPath } from "@/shared/config";
-import { Layout } from "lucide-react";
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router";
 
 export const RoutesProvider = () => {

@@ -17,8 +17,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --radius: 0.625rem;
-  /* --background: oklch(1 0 0); */
-  --background: oklch(97.696% 0.00595 240.381);
+  --background: oklch(1 0 0);
+  /* --background: oklch(97.696% 0.00595 240.381); */
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -45,11 +45,15 @@
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent: oklch(90.138% 0.00107 11.874);
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --blue: oklch(40.852% 0.23149 265.614);
+  /* --blue-brand: oklch(55% 0.21 265);  */
+  --blue-brand: oklab(56.455% -0.04699 -0.15652); /* основной */
+  --blue-brand-hover: oklch(48% 0.21 265); /* темнее */
+  --blue-brand-ring: oklch(72% 0.17 265); /* светлый для ring */
+  --blue-brand-muted: oklch(82% 0.05 265); /* бледный, для disabled */
 }
 
 body {
@@ -82,6 +86,10 @@ body {
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-blue-brand: var(--blue-brand);
+  --color-blue-brand-hover: var(--blue-brand-hover);
+  --color-blue-brand-ring: var(--blue-brand-ring);
+  --color-blue-brand-muted: var(--blue-brand-muted);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -129,6 +137,9 @@ body {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --blue-brand: oklch(65% 0.18 265);
+  --blue-brand-hover: oklch(58% 0.18 265);
+  --blue-brand-ring: oklch(78% 0.14 265);
 }
 
 @layer base {
