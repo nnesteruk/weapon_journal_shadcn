@@ -1,5 +1,6 @@
 import { Layout } from "@/layout";
 import { Login } from "@/pages/login";
+import { ManufacturerPage } from "@/pages/manufacturer";
 import { RoutesPath } from "@/shared/config";
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router";
 
@@ -21,7 +22,7 @@ export const RoutesProvider = () => {
             <Route path={RoutesPath.CALIBER} element={<div>caliber</div>} />
             <Route
               path={RoutesPath.MANUFACTURER}
-              element={<div>manufacturer</div>}
+              element={<ManufacturerPage/>}
             />
             <Route path={RoutesPath.MODEL} element={<div>model</div>} />
             <Route

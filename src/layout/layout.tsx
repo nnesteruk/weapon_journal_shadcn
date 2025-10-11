@@ -1,4 +1,4 @@
-import { AppSidebar } from "@/shared/components/app-sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
 import { RoutesMeta } from "@/shared/config";
 import {
   SidebarInset,

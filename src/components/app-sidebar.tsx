@@ -1,3 +1,13 @@
+import { NavMain } from "@/components/nav-main";
+import { NavUser } from "@/components/nav-user";
+import { RoutesPath } from "@/shared/config";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenuButton,
+} from "@/shared/ui/sidebar";
 import {
   AudioWaveform,
   Boxes,
@@ -14,22 +24,11 @@ import {
 } from "lucide-react";
 import * as React from "react";
 
-import { NavMain } from "@/shared/components/nav-main";
-import { NavUser } from "@/shared/components/nav-user";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarMenuButton,
-} from "@/shared/ui/sidebar";
-import { RoutesPath } from "../config";
-
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: "admin",
+    fullName: "Константинов Александр",
+    avatar: "https://github.com/nnesteruk.png",
   },
   teams: [
     {

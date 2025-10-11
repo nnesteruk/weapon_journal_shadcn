@@ -1,5 +1,3 @@
-import { ChevronsUpDown, LogOut } from "lucide-react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import {
   DropdownMenu,
@@ -14,13 +12,14 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/shared/ui/sidebar";
+import { ChevronsUpDown, LogOut } from "lucide-react";
 
 export function NavUser({
   user,
 }: {
   user: {
     name: string;
-    email: string;
+    fullName: string;
     avatar: string;
   };
 }) {
@@ -39,9 +38,9 @@ export function NavUser({
                 <AvatarImage src={user.avatar} alt={user.name} />
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
+              <div className="grid flex-1 pl-1 text-sm leading-tight">
                 <span className="truncate font-medium">{user.name}</span>
-                <span className="truncate text-xs">{user.email}</span>
+                <span className="truncate text-xs">{user.fullName}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -60,13 +59,17 @@ export function NavUser({
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
-                  <span className="truncate text-xs">{user.email}</span>
+                  <span className="truncate text-xs">{user.fullName}</span>
                 </div>
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => console.log("Log out")}>
+            <DropdownMenuItem
+              variant="destructive"
+              onClick={() => console.log("Log out")}
+              className="cursor-pointer"
+            >
               <LogOut />
-              Log out
+              Выйти
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
