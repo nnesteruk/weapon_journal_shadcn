@@ -1,4 +1,4 @@
-import { Button } from "@/shared/ui/button";
+import { DataTablePagination } from "./pagination";
 import {
   Table,
   TableBody,
@@ -14,12 +14,6 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import {
-  ArrowLeft,
-  ArrowLeftToLine,
-  ArrowRight,
-  ArrowRightToLine,
-} from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -38,6 +32,7 @@ export const DataTable = ({ data, columns }: DataTableProps<TData, TValue>) => {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
+
   return (
     <div>
       <div className="overflow-hidden rounded-md border">
@@ -47,7 +42,7 @@ export const DataTable = ({ data, columns }: DataTableProps<TData, TValue>) => {
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className="font-semibold">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -90,40 +85,7 @@ export const DataTable = ({ data, columns }: DataTableProps<TData, TValue>) => {
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.firstPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          <ArrowLeftToLine />
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          <ArrowLeft />
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          <ArrowRight />
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.lastPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          <ArrowRightToLine />
-        </Button>
-      </div>
+      <DataTablePagination table={table} />
     </div>
   );
 };

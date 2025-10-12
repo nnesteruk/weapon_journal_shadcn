@@ -1,5 +1,5 @@
 import { columns, type Manufacturer } from "./columns";
-import { DataTable } from "@/components/data-table";
+import { DataTable } from "@/components/data-table/data-table";
 import { useEffect, useState } from "react";
 
 const sendData = async () => {
