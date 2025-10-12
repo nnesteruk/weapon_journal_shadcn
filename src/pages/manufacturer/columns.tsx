@@ -7,8 +7,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/shared/ui/dropdown-menu";
+import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu";
 import type { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
+import { Eye, MoreHorizontal, SquarePen, Trash } from "lucide-react";
 
 export type Manufacturer = {
   id: number;
@@ -42,8 +43,10 @@ export const columns: ColumnDef<Manufacturer>[] = [
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuContent align="center">
+            <DropdownMenuLabel className="text-center">
+              Действия
+            </DropdownMenuLabel>
             <DropdownMenuItem
               onClick={() =>
                 navigator.clipboard.writeText(String(manufacturer.id))
@@ -52,8 +55,17 @@ export const columns: ColumnDef<Manufacturer>[] = [
               Copy payment ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuGroup className="flex gap-4">
+              <DropdownMenuItem>
+                <Eye />
+              </DropdownMenuItem>
+              <DropdownMenuItem className="focus:bg-blue-brand-muted">
+                <SquarePen className="text-blue-brand" />
+              </DropdownMenuItem>
+              <DropdownMenuItem variant="destructive">
+                <Trash />
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>
       );
