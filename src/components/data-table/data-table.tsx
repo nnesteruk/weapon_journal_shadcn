@@ -1,4 +1,4 @@
-import { DataTablePagination } from "./pagination";
+import { DataTablePagination } from "./data-table-pagination";
 import {
   Table,
   TableBody,
@@ -85,7 +85,13 @@ export const DataTable = ({ data, columns }: DataTableProps<TData, TValue>) => {
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <div>
+        <div className="flex items-center justify-between">
+          {table.getFilteredSelectedRowModel().rows.length} из{" "}
+          {table.getFilteredRowModel().rows.length} строк выбрано.
+          <DataTablePagination table={table} />
+        </div>
+      </div>
     </div>
   );
 };
