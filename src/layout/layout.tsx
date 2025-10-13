@@ -15,9 +15,9 @@ export const Layout = () => {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset>
+      <SidebarInset className="overflow-hidden">
         <header className="flex h-16 shrink-0 items-center gap-2 bg-sidebar border-2 border-l-0 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 ">
-          <div className="flex items-center gap-2 px-4 ">
+          <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1 cursor-pointer" />
             <Separator
               orientation="vertical"
@@ -29,10 +29,10 @@ export const Layout = () => {
           </div>
           <button></button>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 ">
+        <main className="flex flex-col gap-4 p-4">
           <h2 className="text-2xl font-semibold">{title}</h2>
           <Outlet />
-        </div>
+        </main>
       </SidebarInset>
     </SidebarProvider>
   );

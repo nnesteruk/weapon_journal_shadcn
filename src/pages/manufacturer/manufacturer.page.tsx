@@ -68,9 +68,5 @@ export const ManufacturerPage = () => {
     getData();
   }, []);
 
-  return (
-    <>
-      <DataTable data={data} columns={columns}></DataTable>
-    </>
-  );
+  return <DataTable data={data} columns={columns}></DataTable>;
 };

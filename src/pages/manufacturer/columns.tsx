@@ -88,7 +88,7 @@ export const columns: ColumnDef<Manufacturer>[] = [
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="center">
+          <DropdownMenuContent>
             <DropdownMenuLabel className="text-center">
               Действия
             </DropdownMenuLabel>

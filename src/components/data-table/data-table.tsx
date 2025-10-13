@@ -34,15 +34,18 @@ export const DataTable = ({ data, columns }: DataTableProps<TData, TValue>) => {
   });
 
   return (
-    <div className="w-full h-[calc(100vh-220px)] max-w-[85vw] flex flex-col gap-4">
-      <div className="flex flex-2/3 rounded-md border overflow-hidden">
+    <div className="w-full h-[800px] flex flex-col gap-4">
+      <div className="flex rounded-md border overflow-hidden">
         <Table>
           <TableHeader className="sticky top-0 z-10 bg-background shadow-md">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="font-semibold">
+                    <TableHead
+                      key={header.id}
+                      className="font-semibold min-w-[40px]"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -55,7 +58,7 @@ export const DataTable = ({ data, columns }: DataTableProps<TData, TValue>) => {
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody className="flex-1 overflow-auto">
+          <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
