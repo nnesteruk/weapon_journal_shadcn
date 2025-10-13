@@ -27,9 +27,8 @@ export const Layout = () => {
               Система учета сертификации
             </h1>
           </div>
-          <button></button>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4">
+        <div className="flex flex-1 flex-col gap-4 p-4 overflow-auto">
           <h2 className="text-2xl font-semibold">{title}</h2>
           <Outlet />
         </div>

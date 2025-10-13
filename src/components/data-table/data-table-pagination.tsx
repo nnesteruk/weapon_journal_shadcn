@@ -19,7 +19,7 @@ export const DataTablePagination = ({ table }: { table: Table<TData> }) => {
   const { currentPage, pages } = useDataTablePagination({ table });
 
   return (
-    <div className="flex items-center justify-end space-x-2 py-4">
+    <div className="flex items-center justify-end space-x-2">
       <span>Показывать по:</span>
       <Select
         value={String(table.getState().pagination.pageSize)}

@@ -48,6 +48,30 @@ export const columns: ColumnDef<Manufacturer>[] = [
     header: "Наименование производителя",
   },
   {
+    accessorKey: "name",
+    header: "Наименование производителя",
+  },
+  {
+    accessorKey: "name",
+    header: "Наименование производителя",
+  },
+  {
+    accessorKey: "name",
+    header: "Наименование производителя",
+  },
+  {
+    accessorKey: "name",
+    header: "Наименование производителя",
+  },
+  {
+    accessorKey: "name",
+    header: "Наименование производителя",
+  },
+  {
+    accessorKey: "country",
+    header: "Страна",
+  },
+  {
     accessorKey: "country",
     header: "Страна",
   },

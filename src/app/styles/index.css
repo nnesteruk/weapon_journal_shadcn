@@ -156,3 +156,16 @@ html body[data-scroll-locked] {
     @apply bg-background text-foreground;
   }
 }
+
+::-webkit-scrollbar {
+  @apply w-2 h-2;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: oklch(75.603% 0.03848 265.09 / 0.4);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: oklch(67.041% 0.0325 268.973 / 0.8);
+}

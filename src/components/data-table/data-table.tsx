@@ -34,10 +34,10 @@ export const DataTable = ({ data, columns }: DataTableProps<TData, TValue>) => {
   });
 
   return (
-    <div>
-      <div className="overflow-hidden rounded-md border">
+    <div className="w-full h-[calc(100vh-220px)] max-w-[85vw] flex flex-col gap-4">
+      <div className="flex flex-2/3 rounded-md border overflow-hidden">
         <Table>
-          <TableHeader>
+          <TableHeader className="sticky top-0 z-10 bg-background shadow-md">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -55,7 +55,7 @@ export const DataTable = ({ data, columns }: DataTableProps<TData, TValue>) => {
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody>
+          <TableBody className="flex-1 overflow-auto">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
@@ -85,12 +85,12 @@ export const DataTable = ({ data, columns }: DataTableProps<TData, TValue>) => {
           </TableBody>
         </Table>
       </div>
-      <div>
-        <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between">
+        <span>
           {table.getFilteredSelectedRowModel().rows.length} из{" "}
           {table.getFilteredRowModel().rows.length} строк выбрано.
-          <DataTablePagination table={table} />
-        </div>
+        </span>
+        <DataTablePagination table={table} />
       </div>
     </div>
   );
