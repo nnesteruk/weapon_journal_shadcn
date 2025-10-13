@@ -9,13 +9,23 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/shared/ui/dropdown-menu";
-import type { ColumnDef } from "@tanstack/react-table";
-import { Eye, MoreHorizontal, SquarePen, Trash } from "lucide-react";
+import type { Column, ColumnDef } from "@tanstack/react-table";
+import {
+  ArrowUpDown,
+  Eye,
+  MoreHorizontal,
+  SquarePen,
+  Trash,
+} from "lucide-react";
 
 export type Manufacturer = {
   id: number;
   name: string;
   country: string;
+};
+
+const handleSortColumn = (column: Column<Manufacturer, unknown>) => {
+  return column.toggleSorting(column.getIsSorted() === "asc");
 };
 
 export const columns: ColumnDef<Manufacturer>[] = [
@@ -41,7 +51,16 @@ export const columns: ColumnDef<Manufacturer>[] = [
   },
   {
     accessorKey: "id",
-    header: "ID",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => handleSortColumn(column)}
+        className="cursor-pointer"
+      >
+        ID
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    ),
   },
   {
     accessorKey: "name",

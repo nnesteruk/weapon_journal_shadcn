@@ -12,8 +12,11 @@ import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
+  type SortingState,
   useReactTable,
 } from "@tanstack/react-table";
+import React from "react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -26,11 +29,18 @@ interface DataTableProps<TData, TValue> {
 }
 
 export const DataTable = ({ data, columns }: DataTableProps<TData, TValue>) => {
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      sorting,
+    },
   });
 
   return (
@@ -42,10 +52,7 @@ export const DataTable = ({ data, columns }: DataTableProps<TData, TValue>) => {
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead
-                      key={header.id}
-                      className="font-semibold min-w-[40px]"
-                    >
+                    <TableHead key={header.id} className="font-semibold ">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
