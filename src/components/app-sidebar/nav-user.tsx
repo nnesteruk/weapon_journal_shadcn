@@ -1,3 +1,4 @@
+import { RoutesPath } from "@/shared/config";
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import {
   DropdownMenu,
@@ -13,6 +14,7 @@ import {
   useSidebar,
 } from "@/shared/ui/sidebar";
 import { ChevronsUpDown, LogOut } from "lucide-react";
+import { useNavigate } from "react-router";
 
 export function NavUser({
   user,
@@ -23,7 +25,13 @@ export function NavUser({
     avatar: string;
   };
 }) {
+  const navigate = useNavigate();
   const { isMobile } = useSidebar();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate(RoutesPath.LOGIN);
+  };
 
   return (
     <SidebarMenu>
@@ -65,7 +73,7 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuItem
               variant="destructive"
-              onClick={() => console.log("Log out")}
+              onClick={handleLogout}
               className="cursor-pointer"
             >
               <LogOut />

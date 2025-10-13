@@ -29,7 +29,7 @@ export const DataTablePagination = ({ table }: { table: Table<TData> }) => {
           <SelectValue placeholder="10" />
         </SelectTrigger>
         <SelectContent className="min-w-full">
-          {[10, 20, 30, 40, 50].map((pageSize) => (
+          {[10, 20, 30, 40, 50, 100].map((pageSize) => (
             <SelectItem
               key={pageSize}
               value={pageSize.toString()}
@@ -63,8 +63,9 @@ export const DataTablePagination = ({ table }: { table: Table<TData> }) => {
           key={page}
           variant={page === currentPage ? "default" : "outline"}
           size="sm"
-          onClick={() => table.setPageIndex(page - 1)}
+          onClick={() => table.setPageIndex(Number(page) - 1)}
           className="w-8 cursor-pointer"
+          disabled={page === "..."}
         >
           {page}
         </Button>

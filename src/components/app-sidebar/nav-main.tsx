@@ -1,11 +1,10 @@
-import { type LucideIcon } from "lucide-react";
-
 import {
   SidebarGroup,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/shared/ui/sidebar";
+import { type LucideIcon } from "lucide-react";
 import { NavLink } from "react-router";
 
 type NavMainItem = {

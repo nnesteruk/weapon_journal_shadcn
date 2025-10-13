@@ -1,4 +1,4 @@
-import { AppSidebar } from "@/components/app-sidebar/app-sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
 import { RoutesMeta } from "@/shared/config";
 import {
   SidebarInset,
@@ -29,7 +29,7 @@ export const Layout = () => {
           </div>
           <button></button>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 ">
+        <div className="flex flex-1 flex-col gap-4 p-4">
           <h2 className="text-2xl font-semibold">{title}</h2>
           <Outlet />
         </div>

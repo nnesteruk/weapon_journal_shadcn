@@ -1,5 +1,5 @@
-import { NavMain } from "@/components/nav-main";
-import { NavUser } from "@/components/nav-user";
+import { NavMain } from "@/components/app-sidebar/nav-main";
+import { NavUser } from "@/components/app-sidebar/nav-user";
 import { RoutesPath } from "@/shared/config";
 import {
   Sidebar,
