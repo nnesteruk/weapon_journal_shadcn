@@ -52,7 +52,10 @@ export const DataTable = ({ data, columns }: DataTableProps<TData, TValue>) => {
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="font-semibold ">
+                    <TableHead
+                      key={header.id}
+                      className="px-0 py-2 min-w-[40px] font-semibold first:pl-4 "
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -73,7 +76,7 @@ export const DataTable = ({ data, columns }: DataTableProps<TData, TValue>) => {
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} className="px-4 py-2">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext(),

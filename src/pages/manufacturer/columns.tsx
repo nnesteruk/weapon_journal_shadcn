@@ -55,44 +55,38 @@ export const columns: ColumnDef<Manufacturer>[] = [
       <Button
         variant="ghost"
         onClick={() => handleSortColumn(column)}
-        className="cursor-pointer"
+        className="cursor-pointer hover:bg-sidebar-accent"
       >
         ID
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown />
       </Button>
     ),
   },
   {
     accessorKey: "name",
-    header: "Наименование производителя",
-  },
-  {
-    accessorKey: "name",
-    header: "Наименование производителя",
-  },
-  {
-    accessorKey: "name",
-    header: "Наименование производителя",
-  },
-  {
-    accessorKey: "name",
-    header: "Наименование производителя",
-  },
-  {
-    accessorKey: "name",
-    header: "Наименование производителя",
-  },
-  {
-    accessorKey: "name",
-    header: "Наименование производителя",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => handleSortColumn(column)}
+        className="cursor-pointer hover:bg-sidebar-accent"
+      >
+        Наименование производителя
+        <ArrowUpDown />
+      </Button>
+    ),
   },
   {
     accessorKey: "country",
-    header: "Страна",
-  },
-  {
-    accessorKey: "country",
-    header: "Страна",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => handleSortColumn(column)}
+        className="cursor-pointer hover:bg-sidebar-accent"
+      >
+        Страна
+        <ArrowUpDown />
+      </Button>
+    ),
   },
   {
     id: "actions",
@@ -102,9 +96,12 @@ export const columns: ColumnDef<Manufacturer>[] = [
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
+            <Button
+              variant="ghost"
+              className="h-8 w-8 p-0 hover:bg-sidebar-accent cursor-pointer"
+            >
               <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
+              <MoreHorizontal className="h-4 w-4 " />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
