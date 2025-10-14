@@ -1,3 +1,4 @@
+import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
 import { Button } from "@/shared/ui/button";
 import { Checkbox } from "@/shared/ui/checkbox";
 import {
@@ -9,23 +10,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/shared/ui/dropdown-menu";
-import type { Column, ColumnDef } from "@tanstack/react-table";
-import {
-  ArrowUpDown,
-  Eye,
-  MoreHorizontal,
-  SquarePen,
-  Trash,
-} from "lucide-react";
+import type { ColumnDef } from "@tanstack/react-table";
+import { Eye, MoreHorizontal, SquarePen, Trash } from "lucide-react";
 
 export type Manufacturer = {
   id: number;
   name: string;
   country: string;
-};
-
-const handleSortColumn = (column: Column<Manufacturer, unknown>) => {
-  return column.toggleSorting(column.getIsSorted() === "asc");
 };
 
 export const columns: ColumnDef<Manufacturer>[] = [
@@ -51,45 +42,21 @@ export const columns: ColumnDef<Manufacturer>[] = [
   },
   {
     accessorKey: "id",
-    header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => handleSortColumn(column)}
-        className="cursor-pointer hover:bg-sidebar-accent"
-      >
-        ID
-        <ArrowUpDown />
-      </Button>
-    ),
+    header: (info) => <DataTableColumnHeader info={info} name="ID" />,
   },
   {
     accessorKey: "name",
-    header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => handleSortColumn(column)}
-        className="cursor-pointer hover:bg-sidebar-accent"
-      >
-        Наименование производителя
-        <ArrowUpDown />
-      </Button>
+    header: (info) => (
+      <DataTableColumnHeader info={info} name="Наименование производителя" />
     ),
   },
   {
     accessorKey: "country",
-    header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => handleSortColumn(column)}
-        className="cursor-pointer hover:bg-sidebar-accent"
-      >
-        Страна
-        <ArrowUpDown />
-      </Button>
-    ),
+    header: (info) => <DataTableColumnHeader info={info} name="Страна" />,
   },
   {
     id: "actions",
+
     cell: ({ row }) => {
       const manufacturer = row.original;
 
