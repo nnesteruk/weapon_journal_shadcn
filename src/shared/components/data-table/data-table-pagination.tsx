@@ -15,7 +15,11 @@ import {
   ArrowRightToLine,
 } from "lucide-react";
 
-export const DataTablePagination = ({ table }: { table: Table<TData> }) => {
+export const DataTablePagination = <TData,>({
+  table,
+}: {
+  table: Table<TData>;
+}) => {
   const { currentPage, pages } = useDataTablePagination({ table });
 
   return (
@@ -70,7 +74,6 @@ export const DataTablePagination = ({ table }: { table: Table<TData> }) => {
           {page}
         </Button>
       ))}
-
       <Button
         variant="outline"
         size="sm"
@@ -80,7 +83,6 @@ export const DataTablePagination = ({ table }: { table: Table<TData> }) => {
       >
         <ArrowRight />
       </Button>
-
       <Button
         variant="outline"
         size="sm"

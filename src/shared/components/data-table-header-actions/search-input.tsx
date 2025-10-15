@@ -1,7 +1,8 @@
+import { useDebounce } from "@/shared/hooks";
 import { Input } from "@/shared/ui";
 import type { Table } from "@tanstack/react-table";
 import { Search } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const DataTableSearchInput = <TData,>({
   table,
@@ -10,13 +11,7 @@ export const DataTableSearchInput = <TData,>({
 }) => {
   const [value, setValue] = useState(table.getState().globalFilter ?? "");
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setValue(value);
-    }, 1000);
-
-    return () => clearTimeout(timeout);
-  }, [value]);
+  useDebounce(() => table.setGlobalFilter(value), 1000);
 
   return (
     <div className="relative max-w-xs w-full">
@@ -25,8 +20,8 @@ export const DataTableSearchInput = <TData,>({
         size={16}
       />
       <Input
-        value={table.getState().globalFilter ?? ""}
-        onChange={(e) => table.setGlobalFilter(String(e.target.value))}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         placeholder="Поиск..."
         className="pl-8"
       />

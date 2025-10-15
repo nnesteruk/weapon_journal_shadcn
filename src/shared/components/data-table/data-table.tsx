@@ -8,32 +8,31 @@ import {
   TableRow,
 } from "@/shared/ui";
 import {
-  type ColumnDef,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
+  type ColumnDef,
+  type Table as TableType,
 } from "@tanstack/react-table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface DataTableProps<TData> {
   columns: ColumnDef<TData, any>[];
   data: TData[];
+  renderHeader?: (table: TableType<TData>) => React.ReactNode;
+  enableTablePagination?: boolean;
+  enableTableFilter?: boolean;
 }
-
-interface DataTableProps<TData> {
-  columns: ColumnDef<TData, any>[];
-  data: TData[];
-}
-
-// headerAction: (data, columns);
 
 export const DataTable = <TData,>({
   data,
   columns,
-  headerAction,
+  renderHeader,
+  enableTablePagination = true,
+  enableTableFilter = true,
 }: DataTableProps<TData>) => {
   const [globalFilter, setGlobalFilter] = useState("");
 
@@ -49,10 +48,17 @@ export const DataTable = <TData,>({
       globalFilter,
     },
   });
+  console.log("render table");
+
+  useEffect(() => {
+    if (renderHeader) {
+      renderHeader(table);
+    }
+  }, [table, renderHeader]);
 
   return (
     <div className="w-full h-[800px] flex flex-col gap-4">
-      {headerAction}
+      {enableTableFilter && (renderHeader ? renderHeader(table) : null)}
       <div className="flex rounded-md border overflow-hidden">
         <Table>
           <TableHeader className="sticky top-0 z-10 bg-background shadow-md">
@@ -103,13 +109,15 @@ export const DataTable = <TData,>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-between">
-        <span>
-          {table.getFilteredSelectedRowModel().rows.length} из{" "}
-          {table.getFilteredRowModel().rows.length} строк выбрано.
-        </span>
-        <DataTablePagination table={table} />
-      </div>
+      {enableTablePagination && (
+        <div className="flex items-center justify-between">
+          <span>
+            {table.getFilteredSelectedRowModel().rows.length} из{" "}
+            {table.getFilteredRowModel().rows.length} строк выбрано.
+          </span>
+          <DataTablePagination table={table} />
+        </div>
+      )}
     </div>
   );
 };
