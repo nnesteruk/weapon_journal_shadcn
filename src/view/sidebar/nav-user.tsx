@@ -1,12 +1,12 @@
 import { RoutesPath } from "@/shared/config";
-import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/shared/ui/dropdown-menu";
+} from "@/shared/ui/dropdown-menu/dropdown-menu";
 import {
   SidebarMenu,
   SidebarMenuButton,

@@ -1,10 +1,10 @@
-import { AppSidebar } from "@/components/app-sidebar/app-sidebar";
 import { RoutesMeta } from "@/shared/config";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/shared/ui/sidebar";
+import { AppSidebar } from "@/view";
 import { Separator } from "@radix-ui/react-separator";
 import { Outlet, useLocation } from "react-router";
 

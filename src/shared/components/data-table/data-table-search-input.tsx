@@ -1,4 +1,4 @@
-import { Input } from "@/shared/ui/input";
+import { Input } from "@/shared/ui";
 import type { Table } from "@tanstack/react-table";
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -19,7 +19,7 @@ export const DataTableSearchInput = <TData,>({
   }, [value]);
 
   return (
-    <div className="relative max-w-xs">
+    <div className="relative max-w-xs w-full">
       <Search
         className="absolute left-2 top-2.5 text-muted-foreground"
         size={16}

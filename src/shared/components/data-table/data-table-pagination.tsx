@@ -1,12 +1,12 @@
 import { useDataTablePagination } from "./use-data-table-pagination.hook";
-import { Button } from "@/shared/ui/button";
 import {
+  Button,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/shared/ui/select";
+} from "@/shared/ui";
 import type { Table } from "@tanstack/react-table";
 import {
   ArrowLeft,

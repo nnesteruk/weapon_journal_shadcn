@@ -1,5 +1,7 @@
 import { columns, type Manufacturer } from "./columns";
-import { DataTable } from "@/components/data-table/data-table";
+import { DataTable, DataTableSearchInput } from "@/shared/components";
+import { Dialog, Button } from "@/shared/ui";
+import { PlusIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const sendData = async () => {
@@ -68,5 +70,22 @@ export const ManufacturerPage = () => {
     getData();
   }, []);
 
-  return <DataTable data={data} columns={columns}></DataTable>;
+  return (
+    <>
+      {/* <Button>Добавить изготовителя</Button> */}
+      <div className="flex justify-between items-center">
+        <DataTableSearchInput table={table} />
+        <div className="flex gap-2">
+          <Dialog>
+            <Button>
+              <PlusIcon />
+              Добавить запись
+            </Button>
+          </Dialog>
+          <Button>Экспорт в Excel</Button>
+        </div>
+      </div>
+      <DataTable data={data} columns={columns}></DataTable>;
+    </>
+  );
 };

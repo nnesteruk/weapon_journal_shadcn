@@ -1,7 +1,7 @@
-import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
-import { Button } from "@/shared/ui/button";
-import { Checkbox } from "@/shared/ui/checkbox";
+import { DataTableColumnHeader } from "@/shared/components";
 import {
+  Button,
+  Checkbox,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -9,7 +9,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/shared/ui/dropdown-menu";
+} from "@/shared/ui";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Eye, MoreHorizontal, SquarePen, Trash } from "lucide-react";
 

@@ -12,10 +12,6 @@ export const DataTableColumnHeader = ({
   name,
 }: DataTableColumnHeader<T>) => {
   const sorted = info.column.getIsSorted();
-  const handleSortClick = (e: React.PointerEvent) => {
-    e.preventDefault();
-    return info.column.toggleSorting(info.column.getIsSorted() === "asc");
-  };
 
   return (
     <div
