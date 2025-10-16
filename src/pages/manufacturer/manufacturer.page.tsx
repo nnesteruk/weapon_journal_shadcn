@@ -1,17 +1,14 @@
 import { columns, type Manufacturer } from "./columns";
-import { DataTable, HeaderActions, Modal } from "@/shared/components";
+import { ManufacturerForm } from "./manufacturer.form";
 import {
-  Button,
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  Input,
-} from "@/shared/ui";
+  DataTable,
+  DeleteModal,
+  HeaderActions,
+  Modal,
+} from "@/shared/components";
+import { useModal } from "@/shared/hooks";
+import { Button } from "@/shared/ui";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 
 const sendData = async () => {
   return [
@@ -69,9 +66,11 @@ const sendData = async () => {
 };
 
 export const ManufacturerPage = () => {
-  const [open, setOpen] = useState(false);
-
   const [data, setData] = useState<Manufacturer[]>([]);
+  const { open, openModal, closeModal, modalType } = useModal<Manufacturer>();
+  console.log(open);
+  console.log(modalType);
+
   const getData = async () => {
     const data = await sendData();
     return setData(data);
@@ -81,14 +80,9 @@ export const ManufacturerPage = () => {
     getData();
   }, []);
 
-  const form = useForm<Manufacturer>({
-    defaultValues: { name: "", country: "" },
-    mode: "onSubmit",
-  });
-
-  const handleSubmit = (data) => {
-    console.log(data);
-  };
+  // useEffect(() => {
+  //   form.reset({ country, name });
+  // }, [form.reset, name, country]);
 
   return (
     <>
@@ -96,71 +90,31 @@ export const ManufacturerPage = () => {
         data={data}
         columns={columns}
         renderHeader={(table) => (
-          <HeaderActions table={table} openModal={() => setOpen(true)} />
+          <HeaderActions table={table} onAdd={openModal} />
         )}
       />
-      <Modal open={open} onOpenChange={() => setOpen(false)}>
+      <Modal open={modalType !== null && open} onOpenChange={closeModal}>
         <Modal.Content>
-          <Modal.Header title="Добавление производителя" />
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleSubmit)}>
-              <div>
-                <FormField
-                  control={form.control}
-                  name="name"
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Наименование производителя</FormLabel>
-                      <FormControl>
-                        <Input
-                          id="name"
-                          type="text"
-                          placeholder="Наименование производителя"
-                          autoFocus
-                          aria-invalid={!!form.formState.errors.country}
-                          {...field}
-                        />
-                      </FormControl>
-                      {form.formState.errors.country && (
-                        <FormMessage>Это поле обязательное!</FormMessage>
-                      )}
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="country"
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <FormItem className="mt-4">
-                      <FormLabel>Страна</FormLabel>
-                      <FormControl>
-                        <Input
-                          id="country"
-                          type="text"
-                          placeholder="Страна"
-                          aria-invalid={!!form.formState.errors.country}
-                          {...field}
-                        />
-                      </FormControl>
-                      {form.formState.errors.country && (
-                        <FormMessage>Это поле обязательное!</FormMessage>
-                      )}
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <Modal.Footer className="pt-5">
-                <Modal.Close asChild>
-                  <Button variant="destructive">Отмена</Button>
-                </Modal.Close>
-                <Button type="submit">Добавить производителя</Button>
-              </Modal.Footer>
-            </form>
-          </Form>
+          <Modal.Header
+            title={`${modalType === "add" ? "Добавление" : modalType === "edit" ? "Редактирование" : "Просмотр"} производителя`}
+          />
+          <ManufacturerForm />
+          <Modal.Footer className="pt-5">
+            <Modal.Close asChild>
+              <Button variant="destructive">Отмена</Button>
+            </Modal.Close>
+            <Button type="submit">
+              {modalType === "add"
+                ? "Добавить "
+                : modalType === "edit"
+                  ? "Сохранить "
+                  : "Просмотр "}
+              производителя
+            </Button>
+          </Modal.Footer>
         </Modal.Content>
       </Modal>
+      <DeleteModal onConfirm={() => {}} />
     </>
   );
 };

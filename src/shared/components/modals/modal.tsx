@@ -19,7 +19,7 @@ const Modal = ({ open, onOpenChange, children, ...props }: DialogProps) => {
 
 const ModalHeader = ({
   title,
-  description,
+  description = "",
   children,
   className,
 }: {
@@ -32,7 +32,7 @@ const ModalHeader = ({
     <DialogHeader className={className}>
       {children}
       {title && <DialogTitle>{title}</DialogTitle>}
-      {description && <DialogDescription>{description}</DialogDescription>}
+      <DialogDescription>{description}</DialogDescription>
     </DialogHeader>
   );
 };

@@ -75,23 +75,27 @@ export const columns: ColumnDef<Manufacturer>[] = [
             <DropdownMenuLabel className="text-center">
               Действия
             </DropdownMenuLabel>
-            <DropdownMenuItem
+            {/* <DropdownMenuItem
               onClick={() =>
                 navigator.clipboard.writeText(String(manufacturer.id))
               }
             >
               Copy payment ID
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
             <DropdownMenuSeparator />
-            <DropdownMenuGroup className="flex gap-4">
+            <DropdownMenuGroup>
               <DropdownMenuItem>
                 <Eye />
+                <span className="ml-1">Просмотр</span>
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-blue-brand-muted">
                 <SquarePen className="text-blue-brand" />
+                <span className="ml-1">Редактировать</span>
               </DropdownMenuItem>
+              <DropdownMenuSeparator />
               <DropdownMenuItem variant="destructive">
                 <Trash />
+                <span className="ml-1">Удалить</span>
               </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>
