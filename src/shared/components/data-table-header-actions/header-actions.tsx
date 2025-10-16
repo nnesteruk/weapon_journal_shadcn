@@ -3,12 +3,20 @@ import { Button } from "@/shared/ui";
 import type { Table } from "@tanstack/react-table";
 import { PlusIcon } from "lucide-react";
 
-export const HeaderActions = <TData,>({ table }: { table: Table<TData> }) => {
+export const HeaderActions = <TData,>({
+  table,
+  openModal,
+}: {
+  table: Table<TData>;
+}) => {
+  const handleCreate = () => {
+    openModal();
+  };
   return (
     <div className="flex justify-between">
       <DataTableSearchInput table={table} />
       <div className="flex gap-2">
-        <Button>
+        <Button onClick={handleCreate}>
           <PlusIcon />
           Добавить запись
         </Button>

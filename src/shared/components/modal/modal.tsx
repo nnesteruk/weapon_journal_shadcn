@@ -1,20 +1,65 @@
-import { Button, Dialog, DialogHeader } from "@/shared/ui";
-import { DialogContent, DialogTrigger } from "@radix-ui/react-dialog";
-import { PlusIcon } from "lucide-react";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/shared/ui";
+import { type DialogProps } from "@radix-ui/react-dialog";
 
-export const Modal = () => {
+const Modal = ({ open, onOpenChange, children, ...props }: DialogProps) => {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button>
-          <PlusIcon />
-          Добавить запись
-        </Button>
-      </DialogTrigger>
-      <DialogContent>
-        {" "}
-        v<DialogHeader>Добавление записи</DialogHeader>
-      </DialogContent>
+    <Dialog open={open} onOpenChange={onOpenChange} {...props}>
+      {children}
     </Dialog>
   );
 };
+
+const ModalHeader = ({
+  title,
+  description,
+  children,
+  className,
+}: {
+  title?: string;
+  description?: string;
+  className?: string;
+  children?: React.ReactNode;
+}) => {
+  return (
+    <DialogHeader className={className}>
+      {children}
+      {title && <DialogTitle>{title}</DialogTitle>}
+      {description && <DialogDescription>{description}</DialogDescription>}
+    </DialogHeader>
+  );
+};
+
+const ModalFooter = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return <DialogFooter className={className}>{children}</DialogFooter>;
+};
+
+const ModalContent = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return <DialogContent className={className}>{children}</DialogContent>;
+};
+
+Modal.Header = ModalHeader;
+Modal.Footer = ModalFooter;
+Modal.Content = ModalContent;
+Modal.Close = DialogClose;
+
+export { Modal };

@@ -48,7 +48,6 @@ export const DataTable = <TData,>({
       globalFilter,
     },
   });
-  console.log("render table");
 
   useEffect(() => {
     if (renderHeader) {
