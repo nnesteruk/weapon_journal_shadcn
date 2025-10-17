@@ -10,9 +10,13 @@ import {
 } from "@/shared/ui";
 import { useForm } from "react-hook-form";
 
-export const ManufacturerForm = () => {
+type ManufacturerFormProps = {
+  defaultValues: Manufacturer | {};
+};
+
+export const ManufacturerForm = ({ defaultValues }: ManufacturerFormProps) => {
   const form = useForm<Manufacturer>({
-    defaultValues: { name: "", country: "" },
+    defaultValues: defaultValues ?? { name: "", country: "" },
     mode: "onSubmit",
   });
 

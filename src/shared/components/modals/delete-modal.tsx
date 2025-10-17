@@ -1,30 +1,47 @@
-import { Modal } from "./modal";
-import { useModal } from "@/shared/hooks";
-import { Button } from "@/shared/ui";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  Button,
+} from "@/shared/ui";
+import { AlertDialogDescription } from "@radix-ui/react-alert-dialog";
 
 type DeleteModalProps = {
+  open: boolean;
+  onClose: () => void;
   title?: string;
+  description?: string;
   onConfirm: () => void;
 };
-export const DeleteModal = ({ title, onConfirm }: DeleteModalProps) => {
-  const { open, closeModal } = useModal();
-
+export const DeleteModal = ({
+  open,
+  onClose,
+  title,
+  onConfirm,
+  description,
+}: DeleteModalProps) => {
   return (
-    <Modal open={open} onOpenChange={closeModal}>
-      <Modal.Content>
-        <Modal.Header title={title ?? "Удалить запись?"} />
-        <p className="text-sm text-muted-foreground">
+    <AlertDialog open={open} onOpenChange={onClose}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>{title ?? ""}</AlertDialogTitle>
+          <AlertDialogDescription>{description ?? ""}</AlertDialogDescription>
+        </AlertDialogHeader>
+        {/* <p className="text-sm text-muted-foreground">
           Это действие нельзя отменить. Подтвердите удаление.
-        </p>
-        <Modal.Footer>
-          <Modal.Close asChild>
+        </p> */}
+        <AlertDialogFooter>
+          <AlertDialogCancel asChild>
             <Button variant={"outline"}>Отмена</Button>
-          </Modal.Close>
+          </AlertDialogCancel>
           <Button variant="destructive" onClick={onConfirm}>
             Удалить
           </Button>
-        </Modal.Footer>
-      </Modal.Content>
-    </Modal>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };

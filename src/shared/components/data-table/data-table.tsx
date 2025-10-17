@@ -25,6 +25,7 @@ interface DataTableProps<TData> {
   renderHeader?: (table: TableType<TData>) => React.ReactNode;
   enableTablePagination?: boolean;
   enableTableFilter?: boolean;
+  actions?: boolean;
 }
 
 export const DataTable = <TData,>({
@@ -33,6 +34,7 @@ export const DataTable = <TData,>({
   renderHeader,
   enableTablePagination = true,
   enableTableFilter = true,
+  actions = true,
 }: DataTableProps<TData>) => {
   const [globalFilter, setGlobalFilter] = useState("");
 

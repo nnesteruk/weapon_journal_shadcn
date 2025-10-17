@@ -75,13 +75,6 @@ export const columns: ColumnDef<Manufacturer>[] = [
             <DropdownMenuLabel className="text-center">
               Действия
             </DropdownMenuLabel>
-            {/* <DropdownMenuItem
-              onClick={() =>
-                navigator.clipboard.writeText(String(manufacturer.id))
-              }
-            >
-              Copy payment ID
-            </DropdownMenuItem> */}
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>

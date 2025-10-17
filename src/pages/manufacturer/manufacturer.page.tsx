@@ -1,13 +1,7 @@
 import { columns, type Manufacturer } from "./columns";
-import { ManufacturerForm } from "./manufacturer.form";
-import {
-  DataTable,
-  DeleteModal,
-  HeaderActions,
-  Modal,
-} from "@/shared/components";
+import { ManufacturerModal } from "./manufacturer.modal";
+import { DataTable, DeleteModal, HeaderActions } from "@/shared/components";
 import { useModal } from "@/shared/hooks";
-import { Button } from "@/shared/ui";
 import { useEffect, useState } from "react";
 
 const sendData = async () => {
@@ -67,9 +61,8 @@ const sendData = async () => {
 
 export const ManufacturerPage = () => {
   const [data, setData] = useState<Manufacturer[]>([]);
-  const { open, openModal, closeModal, modalType } = useModal<Manufacturer>();
-  console.log(open);
-  console.log(modalType);
+  const { open, openModal, closeModal, modalType, selectedItem } =
+    useModal<Manufacturer>();
 
   const getData = async () => {
     const data = await sendData();
@@ -80,10 +73,6 @@ export const ManufacturerPage = () => {
     getData();
   }, []);
 
-  // useEffect(() => {
-  //   form.reset({ country, name });
-  // }, [form.reset, name, country]);
-
   return (
     <>
       <DataTable
@@ -93,28 +82,14 @@ export const ManufacturerPage = () => {
           <HeaderActions table={table} onAdd={openModal} />
         )}
       />
-      <Modal open={modalType !== null && open} onOpenChange={closeModal}>
-        <Modal.Content>
-          <Modal.Header
-            title={`${modalType === "add" ? "Добавление" : modalType === "edit" ? "Редактирование" : "Просмотр"} производителя`}
-          />
-          <ManufacturerForm />
-          <Modal.Footer className="pt-5">
-            <Modal.Close asChild>
-              <Button variant="destructive">Отмена</Button>
-            </Modal.Close>
-            <Button type="submit">
-              {modalType === "add"
-                ? "Добавить "
-                : modalType === "edit"
-                  ? "Сохранить "
-                  : "Просмотр "}
-              производителя
-            </Button>
-          </Modal.Footer>
-        </Modal.Content>
-      </Modal>
-      <DeleteModal onConfirm={() => {}} />
+      <ManufacturerModal type={"add"} />
+      <DeleteModal
+        open={modalType === "delete" && open}
+        title="Вы точно уверены?"
+        description=" Это действие нельзя отменить. Подтвердите удаление."
+        onClose={closeModal}
+        onConfirm={() => console.log("Удаляем:", selectedItem)}
+      />
     </>
   );
 };

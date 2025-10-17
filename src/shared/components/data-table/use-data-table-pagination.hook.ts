@@ -1,6 +1,6 @@
 import type { Table } from "@tanstack/react-table";
 
-export const useDataTablePagination = ({
+export const useDataTablePagination = <TData>({
   table,
   maxVisiblePage = 3,
 }: {

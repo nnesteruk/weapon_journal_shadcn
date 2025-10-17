@@ -1,6 +1,6 @@
+import type { ModalType } from "../components";
 import { useState } from "react";
 
-export type ModalType = "add" | "edit" | "view" | "delete";
 export const useModal = <T = unknown>() => {
   const [open, setOpen] = useState(false);
   const [modalType, setModalType] = useState<ModalType | null>(null);
