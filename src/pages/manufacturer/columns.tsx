@@ -1,4 +1,5 @@
 import { DataTableColumnHeader } from "@/shared/components";
+import { ModalTypes, useModal, useSelectedItem } from "@/shared/store";
 import {
   Button,
   Checkbox,
@@ -59,6 +60,8 @@ export const columns: ColumnDef<Manufacturer>[] = [
 
     cell: ({ row }) => {
       const manufacturer = row.original;
+      const openModal = useModal((state) => state.openModal);
+      const setSelectedItem = useSelectedItem((state) => state.setSelectedItem);
 
       return (
         <DropdownMenu>
@@ -77,16 +80,30 @@ export const columns: ColumnDef<Manufacturer>[] = [
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => {
+                  (openModal(ModalTypes.VIEW), setSelectedItem(manufacturer));
+                }}
+              >
                 <Eye />
                 <span className="ml-1">Просмотр</span>
               </DropdownMenuItem>
-              <DropdownMenuItem className="focus:bg-blue-brand-muted">
+              <DropdownMenuItem
+                className="focus:bg-blue-brand-muted"
+                onClick={() => {
+                  (openModal(ModalTypes.EDIT), setSelectedItem(manufacturer));
+                }}
+              >
                 <SquarePen className="text-blue-brand" />
                 <span className="ml-1">Редактировать</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem variant="destructive">
+              <DropdownMenuItem
+                variant="destructive"
+                onClick={() => {
+                  (openModal(ModalTypes.DELETE), setSelectedItem(manufacturer));
+                }}
+              >
                 <Trash />
                 <span className="ml-1">Удалить</span>
               </DropdownMenuItem>

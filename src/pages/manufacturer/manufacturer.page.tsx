@@ -1,8 +1,9 @@
 import { columns, type Manufacturer } from "./columns";
 import { ManufacturerModal } from "./manufacturer.modal";
 import { DataTable, DeleteModal, HeaderActions } from "@/shared/components";
-import { useModal } from "@/shared/hooks";
+import { ModalTypes, useModal, useSelectedItem } from "@/shared/store";
 import { useEffect, useState } from "react";
+import { useShallow } from "zustand/react/shallow";
 
 const sendData = async () => {
   return [
@@ -61,8 +62,14 @@ const sendData = async () => {
 
 export const ManufacturerPage = () => {
   const [data, setData] = useState<Manufacturer[]>([]);
-  const { open, openModal, closeModal, modalType, selectedItem } =
-    useModal<Manufacturer>();
+
+  const openModal = useModal(useShallow((state) => state.openModal));
+  const closeModal = useModal((state) => state.closeModal);
+  const open = useModal((state) => state.open);
+  const modalType = useModal((state) => state.modalType);
+  const selectedItem = useSelectedItem((state) => state.selectedItem);
+
+  // console.log(selectedItem);
 
   const getData = async () => {
     const data = await sendData();
@@ -82,11 +89,11 @@ export const ManufacturerPage = () => {
           <HeaderActions table={table} onAdd={openModal} />
         )}
       />
-      <ManufacturerModal type={"add"} />
+      <ManufacturerModal />
       <DeleteModal
-        open={modalType === "delete" && open}
+        open={modalType === ModalTypes.DELETE && open}
         title="Вы точно уверены?"
-        description=" Это действие нельзя отменить. Подтвердите удаление."
+        description="Это действие нельзя отменить. Подтвердите удаление."
         onClose={closeModal}
         onConfirm={() => console.log("Удаляем:", selectedItem)}
       />

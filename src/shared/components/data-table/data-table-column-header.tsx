@@ -1,13 +1,12 @@
 import type { HeaderContext } from "@tanstack/react-table";
 import { ArrowDown, ArrowUp } from "lucide-react";
-import type { T } from "node_modules/react-router/dist/development/context-DSyS5mLj.d.mts";
 
 type DataTableColumnHeader<T> = {
   info: HeaderContext<T, unknown>;
   name: string;
 };
 
-export const DataTableColumnHeader = ({
+export const DataTableColumnHeader = <T,>({
   info,
   name,
 }: DataTableColumnHeader<T>) => {

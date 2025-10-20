@@ -1,20 +1,14 @@
 import { DataTableSearchInput } from "./search-input";
-import type { ModalType } from "@/shared/components";
+import { ModalTypes, useModal } from "@/shared/store";
 import { Button } from "@/shared/ui";
 import type { Table } from "@tanstack/react-table";
 import { PlusIcon } from "lucide-react";
+import { useShallow } from "zustand/react/shallow";
 
-export const HeaderActions = <TData,>({
-  table,
-  onAdd,
-}: {
-  table: Table<TData>;
-  onAdd?: (type: ModalType) => void;
-}) => {
+export const HeaderActions = <TData,>({ table }: { table: Table<TData> }) => {
+  const openModal = useModal(useShallow((state) => state.openModal));
   const handleOpen = () => {
-    if (typeof onAdd === "function") {
-      return onAdd("add");
-    }
+    openModal(ModalTypes.ADD);
   };
 
   return (
