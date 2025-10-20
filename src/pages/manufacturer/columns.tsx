@@ -1,5 +1,5 @@
 import { DataTableColumnHeader } from "@/shared/components";
-import { ModalTypes, useModal, useSelectedItem } from "@/shared/store";
+import { ModalTypes, openModal, useSelectedItem } from "@/shared/store";
 import {
   Button,
   Checkbox,
@@ -60,7 +60,6 @@ export const columns: ColumnDef<Manufacturer>[] = [
 
     cell: ({ row }) => {
       const manufacturer = row.original;
-      const openModal = useModal((state) => state.openModal);
       const setSelectedItem = useSelectedItem((state) => state.setSelectedItem);
 
       return (

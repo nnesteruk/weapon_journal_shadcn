@@ -1,9 +1,14 @@
 import { columns, type Manufacturer } from "./columns";
 import { ManufacturerModal } from "./manufacturer.modal";
 import { DataTable, DeleteModal, HeaderActions } from "@/shared/components";
-import { ModalTypes, useModal, useSelectedItem } from "@/shared/store";
+import {
+  closeModal,
+  ModalTypes,
+  useModalType,
+  useOpenModal,
+  useSelectedItem,
+} from "@/shared/store";
 import { useEffect, useState } from "react";
-import { useShallow } from "zustand/react/shallow";
 
 const sendData = async () => {
   return [
@@ -62,14 +67,9 @@ const sendData = async () => {
 
 export const ManufacturerPage = () => {
   const [data, setData] = useState<Manufacturer[]>([]);
-
-  const openModal = useModal(useShallow((state) => state.openModal));
-  const closeModal = useModal((state) => state.closeModal);
-  const open = useModal((state) => state.open);
-  const modalType = useModal((state) => state.modalType);
+  const open = useOpenModal();
+  const modalType = useModalType();
   const selectedItem = useSelectedItem((state) => state.selectedItem);
-
-  // console.log(selectedItem);
 
   const getData = async () => {
     const data = await sendData();
@@ -85,9 +85,7 @@ export const ManufacturerPage = () => {
       <DataTable
         data={data}
         columns={columns}
-        renderHeader={(table) => (
-          <HeaderActions table={table} onAdd={openModal} />
-        )}
+        renderHeader={(table) => <HeaderActions table={table} />}
       />
       <ManufacturerModal />
       <DeleteModal

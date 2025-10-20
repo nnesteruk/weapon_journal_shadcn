@@ -1,14 +1,22 @@
-import type { Manufacturer } from "./columns";
 import { ManufacturerForm } from "./manufacturer.form";
 import { Modal } from "@/shared/components";
-import { ModalTypes, useModal, useSelectedItem } from "@/shared/store";
+import {
+  closeModal,
+  ModalTypes,
+  useModalType,
+  useOpenModal,
+  useSelectedItem,
+} from "@/shared/store";
 import { Button } from "@/shared/ui";
+import { useShallow } from "zustand/react/shallow";
 
-export const ManufacturerModal = ({ item }: { item?: Manufacturer }) => {
-  const modalType = useModal((state) => state.modalType);
-  const open = useModal((state) => state.open);
-  const closeModal = useModal((state) => state.closeModal);
-  const selectedItem = useSelectedItem((state) => state.selectedItem);
+export const ManufacturerModal = () => {
+  const modalType = useModalType();
+  const open = useOpenModal();
+
+  const selectedItem = useSelectedItem(
+    useShallow((state) => state.selectedItem),
+  );
 
   const getTitle = () => {
     switch (modalType) {
@@ -22,6 +30,7 @@ export const ManufacturerModal = ({ item }: { item?: Manufacturer }) => {
         return "";
     }
   };
+  console.log("modal");
 
   return (
     <Modal

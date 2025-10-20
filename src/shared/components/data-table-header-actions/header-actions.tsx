@@ -1,12 +1,10 @@
 import { DataTableSearchInput } from "./search-input";
-import { ModalTypes, useModal } from "@/shared/store";
+import { ModalTypes, openModal } from "@/shared/store";
 import { Button } from "@/shared/ui";
 import type { Table } from "@tanstack/react-table";
 import { PlusIcon } from "lucide-react";
-import { useShallow } from "zustand/react/shallow";
 
 export const HeaderActions = <TData,>({ table }: { table: Table<TData> }) => {
-  const openModal = useModal(useShallow((state) => state.openModal));
   const handleOpen = () => {
     openModal(ModalTypes.ADD);
   };
