@@ -1,5 +1,5 @@
 import { DataTableColumnHeader } from "@/shared/components";
-import { ModalTypes, openModal, useSelectedItem } from "@/shared/store";
+import { ModalTypes, openModal, setSelectedItem } from "@/shared/store";
 import {
   Button,
   Checkbox,
@@ -60,7 +60,6 @@ export const columns: ColumnDef<Manufacturer>[] = [
 
     cell: ({ row }) => {
       const manufacturer = row.original;
-      const setSelectedItem = useSelectedItem((state) => state.setSelectedItem);
 
       return (
         <DropdownMenu>

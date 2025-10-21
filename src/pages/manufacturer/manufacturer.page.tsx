@@ -69,7 +69,7 @@ export const ManufacturerPage = () => {
   const [data, setData] = useState<Manufacturer[]>([]);
   const open = useOpenModal();
   const modalType = useModalType();
-  const selectedItem = useSelectedItem((state) => state.selectedItem);
+  const selectedItem = useSelectedItem();
 
   const getData = async () => {
     const data = await sendData();

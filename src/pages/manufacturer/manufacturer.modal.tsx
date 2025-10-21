@@ -8,15 +8,12 @@ import {
   useSelectedItem,
 } from "@/shared/store";
 import { Button } from "@/shared/ui";
-import { useShallow } from "zustand/react/shallow";
 
 export const ManufacturerModal = () => {
   const modalType = useModalType();
   const open = useOpenModal();
 
-  const selectedItem = useSelectedItem(
-    useShallow((state) => state.selectedItem),
-  );
+  const selectedItem = useSelectedItem();
 
   const getTitle = () => {
     switch (modalType) {

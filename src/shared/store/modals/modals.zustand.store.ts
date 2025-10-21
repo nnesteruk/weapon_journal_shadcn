@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create, type StateCreator } from "zustand";
 import { useShallow } from "zustand/react/shallow";
 
 export const ModalTypes = {
@@ -8,39 +8,37 @@ export const ModalTypes = {
   DELETE: "delete",
 } as const;
 
-type ModalStore = {
+type InitialState = {
   open: boolean;
   modalType: (typeof ModalTypes)[keyof typeof ModalTypes] | null;
+};
+type Actions = {
   openModal: (type: (typeof ModalTypes)[keyof typeof ModalTypes]) => void;
   closeModal: () => void;
 };
 
-type SelectedItemStore<TData> = {
-  selectedItem: TData | null;
-  setSelectedItem: (item: TData | null) => void;
-};
+type ModalStore = InitialState & Actions;
 
-const useModal = create<ModalStore>()((set) => ({
+const initialState: InitialState = {
   open: false,
   modalType: null,
+};
+
+const modalStore: StateCreator<ModalStore> = (set) => ({
+  ...initialState,
   openModal: (modalType) => {
     return set({ open: true, modalType });
   },
   closeModal: () => set({ open: false, modalType: null }),
-}));
+});
 
-export const useSelectedItem = create<SelectedItemStore<TData>>()(
-  (set, _, store) => ({
-    selectedItem: null,
-    setSelectedItem: (item) => set({ selectedItem: item }),
-    reset: () => set(store.getInitialState()),
-  }),
-);
+const useModalStore = create<ModalStore>()(modalStore);
 
-const useOpenModal = () => useModal(useShallow((state) => state.open));
-const useModalType = () => useModal(useShallow((state) => state.modalType));
+const useOpenModal = () => useModalStore(useShallow((state) => state.open));
+const useModalType = () =>
+  useModalStore(useShallow((state) => state.modalType));
 const openModal = (type: (typeof ModalTypes)[keyof typeof ModalTypes]) =>
-  useModal.getState().openModal(type);
-const closeModal = () => useModal.getState().closeModal;
+  useModalStore.getState().openModal(type);
+const closeModal = () => useModalStore.getState().closeModal();
 
 export { closeModal, openModal, useModalType, useOpenModal };
