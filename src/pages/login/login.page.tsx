@@ -1,4 +1,4 @@
-import { RoutesPath } from "@/shared/config";
+import { LoginForm } from "./login.form";
 import {
   Button,
   Card,
@@ -7,40 +7,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  Input,
 } from "@/shared/ui";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
 
-type LoginForm = {
-  login: string;
-  password: string;
-};
-
-export const Login = () => {
-  const form = useForm<LoginForm>({
-    defaultValues: { login: "", password: "" },
-    mode: "onSubmit",
-  });
-
-  const navigate = useNavigate();
-
-  const onSubmit = (data: LoginForm) => {
-    console.log(data);
-    if (data.password === "123456qQ!" && data.login === "admin") {
-      localStorage.setItem("token", "isAuth");
-      return navigate(RoutesPath.MAIN);
-    }
-    alert("Неправильный пароль или логин!");
-    form.reset();
-  };
-
+export const LoginPage = () => {
   return (
     <div className="flex justify-center items-center h-screen">
       <Card className="w-full max-w-sm">
@@ -49,55 +18,7 @@ export const Login = () => {
           <CardDescription>Введите логин и пароль, чтобы войти</CardDescription>
         </CardHeader>
         <CardContent>
-          <Form {...form}>
-            <form id="login-form" onSubmit={form.handleSubmit(onSubmit)}>
-              <FormField
-                control={form.control}
-                name="login"
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Логин</FormLabel>
-                    <FormControl>
-                      <Input
-                        id="login"
-                        type="text"
-                        placeholder="user123"
-                        autoFocus
-                        aria-invalid={!!form.formState.errors.login}
-                        {...field}
-                      />
-                    </FormControl>
-                    {form.formState.errors.login && (
-                      <FormMessage>Это поле обязательное!</FormMessage>
-                    )}
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <FormItem className="mt-4">
-                    <FormLabel>Пароль</FormLabel>
-                    <FormControl>
-                      <Input
-                        id="password"
-                        type="password"
-                        placeholder="••••••••"
-                        aria-invalid={!!form.formState.errors.password}
-                        {...field}
-                      />
-                    </FormControl>
-                    {form.formState.errors.password && (
-                      <FormMessage>Это поле обязательное!</FormMessage>
-                    )}
-                  </FormItem>
-                )}
-              />
-            </form>
-          </Form>
+          <LoginForm />
         </CardContent>
         <CardFooter className="flex-col gap-2">
           <Button

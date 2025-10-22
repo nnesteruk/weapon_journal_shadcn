@@ -26,10 +26,13 @@ const initialState: InitialState = {
 
 const modalStore: StateCreator<ModalStore> = (set) => ({
   ...initialState,
-  openModal: (modalType) => {
-    return set({ open: true, modalType });
+
+  openModal: (modalType) => set({ open: true, modalType }),
+  closeModal: () => {
+    set({ open: false });
+
+    setTimeout(() => set({ modalType: null }), 200);
   },
-  closeModal: () => set({ open: false, modalType: null }),
 });
 
 const useModalStore = create<ModalStore>()(modalStore);

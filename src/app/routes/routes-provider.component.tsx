@@ -1,5 +1,5 @@
 import { Layout } from "@/layout";
-import { Login } from "@/pages/login";
+import { ApplicantPage, LoginPage } from "@/pages";
 import { ManufacturerPage } from "@/pages/manufacturer";
 import { RoutesPath } from "@/shared/config";
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router";
@@ -13,16 +13,16 @@ export const RoutesProvider = () => {
   return (
     <BrowserRouter basename={RoutesPath.BASE_NAME}>
       <Routes>
-        <Route path={RoutesPath.LOGIN} element={<Login />} />
+        <Route path={RoutesPath.LOGIN} element={<LoginPage />} />
         <Route element={<PrivateRoute />}>
           <Route path={RoutesPath.MAIN} element={<Layout />}>
             <Route index element={<div>main table </div>} />
-            <Route path={RoutesPath.APPLICANT} element={<div>applicant</div>} />
+            <Route path={RoutesPath.APPLICANT} element={<ApplicantPage />} />
             <Route path={RoutesPath.PRODUCT} element={<div>product</div>} />
             <Route path={RoutesPath.CALIBER} element={<div>caliber</div>} />
             <Route
               path={RoutesPath.MANUFACTURER}
-              element={<ManufacturerPage/>}
+              element={<ManufacturerPage />}
             />
             <Route path={RoutesPath.MODEL} element={<div>model</div>} />
             <Route

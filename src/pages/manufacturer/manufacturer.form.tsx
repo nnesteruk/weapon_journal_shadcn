@@ -1,4 +1,5 @@
 import type { Manufacturer } from "./columns";
+import { ModalTypes, useModalType } from "@/shared/store";
 import {
   Form,
   FormControl,
@@ -20,6 +21,8 @@ export const ManufacturerForm = ({ defaultValues }: ManufacturerFormProps) => {
     mode: "onSubmit",
   });
 
+  const ModalType = useModalType();
+
   const handleSubmit = (data: Manufacturer) => {
     console.log(data);
   };
@@ -31,6 +34,7 @@ export const ManufacturerForm = ({ defaultValues }: ManufacturerFormProps) => {
           <FormField
             control={form.control}
             name="name"
+            disabled={ModalType === ModalTypes.VIEW}
             rules={{ required: true }}
             render={({ field }) => (
               <FormItem>
@@ -54,6 +58,7 @@ export const ManufacturerForm = ({ defaultValues }: ManufacturerFormProps) => {
           <FormField
             control={form.control}
             name="country"
+            disabled={ModalType === ModalTypes.VIEW}
             rules={{ required: true }}
             render={({ field }) => (
               <FormItem className="mt-4">

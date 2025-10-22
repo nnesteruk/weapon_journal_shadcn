@@ -1,1 +1,1 @@
-export * from "./manufacturer.page";
+export { ManufacturerPage } from "./manufacturer.page";

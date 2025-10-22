@@ -1,32 +1,20 @@
-import { ManufacturerForm } from "./manufacturer.form";
-import { Modal } from "@/shared/components";
+import { Modal } from "./modal";
 import {
   closeModal,
   ModalTypes,
   useModalType,
   useOpenModal,
-  useSelectedItem,
 } from "@/shared/store";
 import { Button } from "@/shared/ui";
 
-export const ManufacturerModal = () => {
+type MainModalProps = {
+  FormComponent: React.ReactNode;
+  entityName: string;
+};
+
+export const MainModal = ({ FormComponent, entityName }: MainModalProps) => {
   const modalType = useModalType();
   const open = useOpenModal();
-
-  const selectedItem = useSelectedItem();
-
-  const getTitle = () => {
-    switch (modalType) {
-      case ModalTypes.ADD:
-        return "Добавление производителя";
-      case ModalTypes.EDIT:
-        return "Редактирование производителя";
-      case ModalTypes.VIEW:
-        return "Просмотр производителя";
-      default:
-        return "";
-    }
-  };
 
   return (
     <Modal
@@ -34,8 +22,8 @@ export const ManufacturerModal = () => {
       onOpenChange={closeModal}
     >
       <Modal.Content>
-        <Modal.Header title={getTitle()} />
-        <ManufacturerForm defaultValues={selectedItem ?? {}} />
+        <Modal.Header></Modal.Header>
+        {FormComponent}
         <Modal.Footer>
           <Modal.Close asChild>
             <Button variant="destructive">Отмена</Button>
@@ -43,7 +31,7 @@ export const ManufacturerModal = () => {
           {modalType !== ModalTypes.VIEW && (
             <Button type="submit">
               {modalType === ModalTypes.ADD ? "Добавить " : "Сохранить "}
-              производителя
+              {entityName}
             </Button>
           )}
         </Modal.Footer>
