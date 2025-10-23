@@ -1,4 +1,3 @@
-import type { Manufacturer } from "./columns";
 import { ModalTypes, useModalType } from "@/shared/store";
 import {
   Form,
@@ -9,32 +8,53 @@ import {
   FormMessage,
   Input,
 } from "@/shared/ui";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import z from "zod";
 
+const manufacturerFormSchema = z.object({
+  name: z
+    .string({ error: "Поле обязательно для заполнения" })
+    .trim()
+    .min(3, { error: "Минимум 3 символа" })
+    .max(250, { error: "Максимум 250 символов" }),
+  country: z
+    .string({ error: "Поле обязательно для заполнения" })
+    .trim()
+    .min(3, { error: "Минимум 3 символа" })
+    .max(250, { error: "Максимум 250 символов" }),
+});
+
+type ManufacturerForm = z.infer<typeof manufacturerFormSchema>;
 type ManufacturerFormProps = {
-  defaultValues: Manufacturer | {};
+  defaultValues?: Partial<ManufacturerForm>;
+  formId: string;
 };
 
-export const ManufacturerForm = ({ defaultValues }: ManufacturerFormProps) => {
-  const form = useForm<Manufacturer>({
-    defaultValues: defaultValues ?? { name: "", country: "" },
+export const ManufacturerForm = ({
+  defaultValues,
+  formId,
+}: ManufacturerFormProps) => {
+  const modalType = useModalType();
+  const form = useForm<ManufacturerForm>({
+    defaultValues:
+      modalType === ModalTypes.ADD ? { name: "", country: "" } : defaultValues,
     mode: "onSubmit",
+    resolver: zodResolver(manufacturerFormSchema),
   });
 
-  const ModalType = useModalType();
-
-  const handleSubmit = (data: Manufacturer) => {
+  const handleSubmit = (data: ManufacturerForm) => {
     console.log(data);
   };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)}>
+      <form id={formId} onSubmit={form.handleSubmit(handleSubmit)}>
         <div>
           <FormField
             control={form.control}
             name="name"
-            disabled={ModalType === ModalTypes.VIEW}
+            disabled={modalType === ModalTypes.VIEW}
             rules={{ required: true }}
             render={({ field }) => (
               <FormItem>
@@ -45,12 +65,14 @@ export const ManufacturerForm = ({ defaultValues }: ManufacturerFormProps) => {
                     type="text"
                     placeholder="Наименование производителя"
                     autoFocus
-                    aria-invalid={!!form.formState.errors.country}
+                    aria-invalid={!!form.formState.errors.name}
                     {...field}
                   />
                 </FormControl>
-                {form.formState.errors.country && (
-                  <FormMessage>Это поле обязательное!</FormMessage>
+                {form.formState.errors.name && (
+                  <FormMessage>
+                    {form.formState.errors.name.message}
+                  </FormMessage>
                 )}
               </FormItem>
             )}
@@ -58,7 +80,7 @@ export const ManufacturerForm = ({ defaultValues }: ManufacturerFormProps) => {
           <FormField
             control={form.control}
             name="country"
-            disabled={ModalType === ModalTypes.VIEW}
+            disabled={modalType === ModalTypes.VIEW}
             rules={{ required: true }}
             render={({ field }) => (
               <FormItem className="mt-4">
@@ -73,7 +95,9 @@ export const ManufacturerForm = ({ defaultValues }: ManufacturerFormProps) => {
                   />
                 </FormControl>
                 {form.formState.errors.country && (
-                  <FormMessage>Это поле обязательное!</FormMessage>
+                  <FormMessage>
+                    {form.formState.errors.country.message}
+                  </FormMessage>
                 )}
               </FormItem>
             )}

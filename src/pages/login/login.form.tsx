@@ -14,8 +14,16 @@ import { useNavigate } from "react-router";
 import z from "zod";
 
 const loginSchema = z.object({
-  login: z.string().trim().min(3, { error: "Минимум 3 символа" }),
-  password: z.string().trim().min(8, { error: "Минимум 8 символов" }),
+  login: z
+    .string()
+    .trim()
+    .min(3, { error: "Минимум 3 символа" })
+    .max(30, { error: "Максимум 30 символов" }),
+  password: z
+    .string()
+    .trim()
+    .min(8, { error: "Минимум 8 символов" })
+    .max(30, { error: "Максимум 30 символов" }),
 });
 
 type LoginForm = z.infer<typeof loginSchema>;

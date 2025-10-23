@@ -1,6 +1,11 @@
 import { columns, type Manufacturer } from "./columns";
-import { ManufacturerModal } from "./manufacturer.modal";
-import { DataTable, DeleteModal, HeaderActions } from "@/shared/components";
+import { ManufacturerForm } from "./manufacturer.form";
+import {
+  DataTable,
+  DeleteModal,
+  HeaderActions,
+  MainModal,
+} from "@/shared/components";
 import {
   closeModal,
   ModalTypes,
@@ -76,6 +81,13 @@ export const ManufacturerPage = () => {
     return setData(data);
   };
 
+  const titleMap = {
+    [ModalTypes.ADD]: "Добавление производителя",
+    [ModalTypes.EDIT]: "Редактирование производителя",
+    [ModalTypes.VIEW]: "Просмотр производителя",
+    [ModalTypes.DELETE]: "",
+  };
+
   useEffect(() => {
     getData();
   }, []);
@@ -87,7 +99,17 @@ export const ManufacturerPage = () => {
         columns={columns}
         renderHeader={(table) => <HeaderActions table={table} />}
       />
-      <ManufacturerModal />
+      <MainModal
+        formId="manufacturer-form"
+        titleMap={titleMap}
+        FormComponent={
+          <ManufacturerForm
+            defaultValues={selectedItem ?? {}}
+            formId="manufacturer-form"
+          />
+        }
+        entityName={"производителя"}
+      />
       <DeleteModal
         open={modalType === ModalTypes.DELETE && open}
         title="Вы точно уверены?"

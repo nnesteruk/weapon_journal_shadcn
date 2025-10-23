@@ -8,13 +8,32 @@ import {
 import { Button } from "@/shared/ui";
 
 type MainModalProps = {
+  titleMap: Record<
+    (typeof ModalTypes)[keyof typeof ModalTypes],
+    string | undefined
+  >;
   FormComponent: React.ReactNode;
+  formId: string;
   entityName: string;
 };
 
-export const MainModal = ({ FormComponent, entityName }: MainModalProps) => {
+export const MainModal = ({
+  titleMap,
+  formId,
+  FormComponent,
+  entityName,
+}: MainModalProps) => {
   const modalType = useModalType();
   const open = useOpenModal();
+
+  // const titleMap = {
+  //   [ModalTypes.ADD]: `Добавление ${entityName}`,
+  //   [ModalTypes.EDIT]: `Редактирование ${entityName}`,
+  //   [ModalTypes.VIEW]: `Просмотр ${entityName}`,
+  //   [ModalTypes.DELETE]: "",
+  // };
+
+  const title = modalType ? titleMap[modalType] : "";
 
   return (
     <Modal
@@ -22,14 +41,14 @@ export const MainModal = ({ FormComponent, entityName }: MainModalProps) => {
       onOpenChange={closeModal}
     >
       <Modal.Content>
-        <Modal.Header></Modal.Header>
+        <Modal.Header title={title} />
         {FormComponent}
         <Modal.Footer>
           <Modal.Close asChild>
             <Button variant="destructive">Отмена</Button>
           </Modal.Close>
           {modalType !== ModalTypes.VIEW && (
-            <Button type="submit">
+            <Button type="submit" form={formId}>
               {modalType === ModalTypes.ADD ? "Добавить " : "Сохранить "}
               {entityName}
             </Button>

@@ -1,9 +1,10 @@
+import { ApplicationForm } from "./application.form";
 import { columns } from "./columns";
 import {
   DataTable,
   DeleteModal,
   HeaderActions,
-  Modal,
+  MainModal,
 } from "@/shared/components";
 import {
   ModalTypes,
@@ -18,6 +19,13 @@ export const ApplicantPage = () => {
   const modalType = useModalType();
   const selectedItem = useSelectedItem();
 
+  const titleMap = {
+    [ModalTypes.ADD]: "Добавление заявителя",
+    [ModalTypes.EDIT]: "Редактирование заявителя",
+    [ModalTypes.VIEW]: "Просмотр заявителя",
+    [ModalTypes.DELETE]: "",
+  };
+
   return (
     <>
       <DataTable
@@ -25,7 +33,12 @@ export const ApplicantPage = () => {
         columns={columns}
         renderHeader={(table) => <HeaderActions table={table} />}
       />
-      <Modal></Modal>
+      <MainModal
+        formId="applicant-form"
+        titleMap={titleMap}
+        entityName={"заявителя"}
+        FormComponent={<ApplicationForm defaultValues={selectedItem ?? {}} />}
+      />
       <DeleteModal
         open={modalType === ModalTypes.DELETE && open}
         title="Вы точно уверены?"
