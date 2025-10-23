@@ -1,4 +1,4 @@
-import { ApplicationForm } from "./application.form";
+import { ProductsCategoryForm } from "../products-category/products-category.form";
 import { columns } from "./columns";
 import {
   DataTable,
@@ -14,15 +14,15 @@ import {
   useSelectedItem,
 } from "@/shared/store";
 
-export const ApplicantPage = () => {
+export const ProductsTypePage = () => {
   const open = useOpenModal();
   const modalType = useModalType();
   const selectedItem = useSelectedItem();
 
   const titleMap = {
-    [ModalTypes.ADD]: "Добавление заявителя",
-    [ModalTypes.EDIT]: "Редактирование заявителя",
-    [ModalTypes.VIEW]: "Просмотр заявителя",
+    [ModalTypes.ADD]: "Добавление вида продукции",
+    [ModalTypes.EDIT]: "Редактирование вида продукции",
+    [ModalTypes.VIEW]: "",
     [ModalTypes.DELETE]: "",
   };
 
@@ -34,13 +34,13 @@ export const ApplicantPage = () => {
         renderHeader={(table) => <HeaderActions table={table} />}
       />
       <MainModal
-        formId="applicant-form"
+        formId="products-type-form"
         titleMap={titleMap}
-        entityName={"заявителя"}
+        entityName={"вид продукции"}
         FormComponent={
-          <ApplicationForm
+          <ProductsCategoryForm
             defaultValues={selectedItem ?? {}}
-            formId="applicant-form"
+            formId="products-type-form"
           />
         }
       />

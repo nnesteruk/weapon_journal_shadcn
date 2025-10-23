@@ -12,32 +12,32 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
-const applicationFormSchema = z.object({
+const productsCategoryFormSchema = z.object({
   name: z
     .string({ error: "Поле обязательно для заполнения" })
-    .min(3, { error: "Минимум 3 символа" })
+    .min(2, { error: "Минимум 3 символа" })
     .max(250, { error: "Максимум 250 символов" })
     .trim(),
 });
 
-type ApplicationForm = z.infer<typeof applicationFormSchema>;
-type ApplicationFormProps = {
-  defaultValues?: Partial<ApplicationForm>;
+type ProductsCategoryForm = z.infer<typeof productsCategoryFormSchema>;
+type ProductsCategoryFormProps = {
+  defaultValues?: Partial<ProductsCategoryForm>;
   formId?: string;
 };
 
-export const ApplicationForm = ({
+export const ProductsCategoryForm = ({
   defaultValues,
   formId,
-}: ApplicationFormProps) => {
+}: ProductsCategoryFormProps) => {
   const modalType = useModalType();
-  const form = useForm<ApplicationForm>({
+  const form = useForm<ProductsCategoryForm>({
     defaultValues: modalType === ModalTypes.ADD ? { name: "" } : defaultValues,
     mode: "onSubmit",
-    resolver: zodResolver(applicationFormSchema),
+    resolver: zodResolver(productsCategoryFormSchema),
   });
 
-  const handleSubmit = (data: ApplicationForm) => {
+  const handleSubmit = (data: ProductsCategoryForm) => {
     console.log(data);
   };
 
@@ -51,12 +51,12 @@ export const ApplicationForm = ({
           rules={{ required: true }}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>ФИО заявителя</FormLabel>
+              <FormLabel>Наименование категории</FormLabel>
               <FormControl>
                 <Input
                   id="name"
                   type="text"
-                  placeholder="ФИО заявителя"
+                  placeholder="Наименование категории"
                   autoFocus
                   aria-invalid={!!form.formState.errors.name}
                   {...field}

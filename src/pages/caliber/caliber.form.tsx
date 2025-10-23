@@ -12,32 +12,29 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
-const applicationFormSchema = z.object({
+const caliberFormSchema = z.object({
   name: z
     .string({ error: "Поле обязательно для заполнения" })
-    .min(3, { error: "Минимум 3 символа" })
-    .max(250, { error: "Максимум 250 символов" })
+    .min(2, { error: "Минимум 3 символа" })
+    .max(100, { error: "Максимум 100 символов" })
     .trim(),
 });
 
-type ApplicationForm = z.infer<typeof applicationFormSchema>;
-type ApplicationFormProps = {
-  defaultValues?: Partial<ApplicationForm>;
+type CaliberForm = z.infer<typeof caliberFormSchema>;
+type CaliberFormProps = {
+  defaultValues?: Partial<CaliberForm>;
   formId?: string;
 };
 
-export const ApplicationForm = ({
-  defaultValues,
-  formId,
-}: ApplicationFormProps) => {
+export const CaliberForm = ({ defaultValues, formId }: CaliberFormProps) => {
   const modalType = useModalType();
-  const form = useForm<ApplicationForm>({
+  const form = useForm<CaliberForm>({
     defaultValues: modalType === ModalTypes.ADD ? { name: "" } : defaultValues,
     mode: "onSubmit",
-    resolver: zodResolver(applicationFormSchema),
+    resolver: zodResolver(caliberFormSchema),
   });
 
-  const handleSubmit = (data: ApplicationForm) => {
+  const handleSubmit = (data: CaliberForm) => {
     console.log(data);
   };
 
@@ -51,12 +48,12 @@ export const ApplicationForm = ({
           rules={{ required: true }}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>ФИО заявителя</FormLabel>
+              <FormLabel>Наименование калибра</FormLabel>
               <FormControl>
                 <Input
                   id="name"
                   type="text"
-                  placeholder="ФИО заявителя"
+                  placeholder="Калибр"
                   autoFocus
                   aria-invalid={!!form.formState.errors.name}
                   {...field}

@@ -12,32 +12,32 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
-const applicationFormSchema = z.object({
+const productsTypeFormSchema = z.object({
   name: z
     .string({ error: "Поле обязательно для заполнения" })
-    .min(3, { error: "Минимум 3 символа" })
+    .min(2, { error: "Минимум 3 символа" })
     .max(250, { error: "Максимум 250 символов" })
     .trim(),
 });
 
-type ApplicationForm = z.infer<typeof applicationFormSchema>;
-type ApplicationFormProps = {
-  defaultValues?: Partial<ApplicationForm>;
+type ProductsTypeForm = z.infer<typeof productsTypeFormSchema>;
+type ProductsTypeFormProps = {
+  defaultValues?: Partial<ProductsTypeForm>;
   formId?: string;
 };
 
-export const ApplicationForm = ({
+export const ProductsTypeForm = ({
   defaultValues,
   formId,
-}: ApplicationFormProps) => {
+}: ProductsTypeFormProps) => {
   const modalType = useModalType();
-  const form = useForm<ApplicationForm>({
+  const form = useForm<ProductsTypeForm>({
     defaultValues: modalType === ModalTypes.ADD ? { name: "" } : defaultValues,
     mode: "onSubmit",
-    resolver: zodResolver(applicationFormSchema),
+    resolver: zodResolver(productsTypeFormSchema),
   });
 
-  const handleSubmit = (data: ApplicationForm) => {
+  const handleSubmit = (data: ProductsTypeForm) => {
     console.log(data);
   };
 
@@ -51,12 +51,12 @@ export const ApplicationForm = ({
           rules={{ required: true }}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>ФИО заявителя</FormLabel>
+              <FormLabel>Вид продукции</FormLabel>
               <FormControl>
                 <Input
                   id="name"
                   type="text"
-                  placeholder="ФИО заявителя"
+                  placeholder="Вид продукции"
                   autoFocus
                   aria-invalid={!!form.formState.errors.name}
                   {...field}

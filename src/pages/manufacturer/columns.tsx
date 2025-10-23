@@ -5,7 +5,7 @@ import {
 import { Checkbox } from "@/shared/ui";
 import type { ColumnDef } from "@tanstack/react-table";
 
-export type Manufacturer = {
+type Manufacturer = {
   id: number;
   name: string;
   country: string;

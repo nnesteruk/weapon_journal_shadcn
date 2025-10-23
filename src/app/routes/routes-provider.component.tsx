@@ -1,6 +1,13 @@
 import { Layout } from "@/layout";
-import { ApplicantPage, LoginPage } from "@/pages";
-import { ManufacturerPage } from "@/pages/manufacturer";
+import {
+  ApplicantPage,
+  CaliberPage,
+  LoginPage,
+  ManufacturerPage,
+  PerformerPage,
+  ProductsCategoryPage,
+  ProductsTypePage,
+} from "@/pages";
 import { RoutesPath } from "@/shared/config";
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router";
 
@@ -19,7 +26,7 @@ export const RoutesProvider = () => {
             <Route index element={<div>main table </div>} />
             <Route path={RoutesPath.APPLICANT} element={<ApplicantPage />} />
             <Route path={RoutesPath.PRODUCT} element={<div>product</div>} />
-            <Route path={RoutesPath.CALIBER} element={<div>caliber</div>} />
+            <Route path={RoutesPath.CALIBER} element={<CaliberPage />} />
             <Route
               path={RoutesPath.MANUFACTURER}
               element={<ManufacturerPage />}
@@ -27,13 +34,13 @@ export const RoutesProvider = () => {
             <Route path={RoutesPath.MODEL} element={<div>model</div>} />
             <Route
               path={RoutesPath.PRODUCTS_CATEGORY}
-              element={<div>products_category</div>}
+              element={<ProductsCategoryPage />}
             />
             <Route
               path={RoutesPath.PRODUCTS_TYPE}
-              element={<div>products_type</div>}
+              element={<ProductsTypePage />}
             />
-            <Route path={RoutesPath.PERFORMER} element={<div>performer</div>} />
+            <Route path={RoutesPath.PERFORMER} element={<PerformerPage />} />
           </Route>
         </Route>
         <Route

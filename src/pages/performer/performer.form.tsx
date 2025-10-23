@@ -12,32 +12,32 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
-const applicationFormSchema = z.object({
+const performerFormSchema = z.object({
   name: z
     .string({ error: "Поле обязательно для заполнения" })
-    .min(3, { error: "Минимум 3 символа" })
+    .min(2, { error: "Минимум 3 символа" })
     .max(250, { error: "Максимум 250 символов" })
     .trim(),
 });
 
-type ApplicationForm = z.infer<typeof applicationFormSchema>;
-type ApplicationFormProps = {
-  defaultValues?: Partial<ApplicationForm>;
+type PerformerForm = z.infer<typeof performerFormSchema>;
+type PerformerFormProps = {
+  defaultValues?: Partial<PerformerForm>;
   formId?: string;
 };
 
-export const ApplicationForm = ({
+export const PerformerForm = ({
   defaultValues,
   formId,
-}: ApplicationFormProps) => {
+}: PerformerFormProps) => {
   const modalType = useModalType();
-  const form = useForm<ApplicationForm>({
+  const form = useForm<PerformerForm>({
     defaultValues: modalType === ModalTypes.ADD ? { name: "" } : defaultValues,
     mode: "onSubmit",
-    resolver: zodResolver(applicationFormSchema),
+    resolver: zodResolver(performerFormSchema),
   });
 
-  const handleSubmit = (data: ApplicationForm) => {
+  const handleSubmit = (data: PerformerForm) => {
     console.log(data);
   };
 
@@ -51,12 +51,12 @@ export const ApplicationForm = ({
           rules={{ required: true }}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>ФИО заявителя</FormLabel>
+              <FormLabel>ФИО исполнителя</FormLabel>
               <FormControl>
                 <Input
                   id="name"
                   type="text"
-                  placeholder="ФИО заявителя"
+                  placeholder="ФИО исполнителя"
                   autoFocus
                   aria-invalid={!!form.formState.errors.name}
                   {...field}

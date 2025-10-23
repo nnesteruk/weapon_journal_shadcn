@@ -1,5 +1,5 @@
-import { ApplicationForm } from "./application.form";
 import { columns } from "./columns";
+import { PerformerForm } from "./performer.form";
 import {
   DataTable,
   DeleteModal,
@@ -14,15 +14,15 @@ import {
   useSelectedItem,
 } from "@/shared/store";
 
-export const ApplicantPage = () => {
+export const PerformerPage = () => {
   const open = useOpenModal();
   const modalType = useModalType();
   const selectedItem = useSelectedItem();
 
   const titleMap = {
-    [ModalTypes.ADD]: "Добавление заявителя",
-    [ModalTypes.EDIT]: "Редактирование заявителя",
-    [ModalTypes.VIEW]: "Просмотр заявителя",
+    [ModalTypes.ADD]: "Добавление исполнителя",
+    [ModalTypes.EDIT]: "Редактирование исполнителя",
+    [ModalTypes.VIEW]: "Просмотр исполнителя",
     [ModalTypes.DELETE]: "",
   };
 
@@ -34,13 +34,13 @@ export const ApplicantPage = () => {
         renderHeader={(table) => <HeaderActions table={table} />}
       />
       <MainModal
-        formId="applicant-form"
+        formId="performer-form"
         titleMap={titleMap}
-        entityName={"заявителя"}
+        entityName={"исполнителя"}
         FormComponent={
-          <ApplicationForm
+          <PerformerForm
             defaultValues={selectedItem ?? {}}
-            formId="applicant-form"
+            formId="performer-form"
           />
         }
       />

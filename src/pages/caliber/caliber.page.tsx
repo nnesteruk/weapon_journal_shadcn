@@ -1,4 +1,4 @@
-import { ApplicationForm } from "./application.form";
+import { CaliberForm } from "./caliber.form";
 import { columns } from "./columns";
 import {
   DataTable,
@@ -14,15 +14,15 @@ import {
   useSelectedItem,
 } from "@/shared/store";
 
-export const ApplicantPage = () => {
+export const CaliberPage = () => {
   const open = useOpenModal();
   const modalType = useModalType();
   const selectedItem = useSelectedItem();
 
   const titleMap = {
-    [ModalTypes.ADD]: "Добавление заявителя",
-    [ModalTypes.EDIT]: "Редактирование заявителя",
-    [ModalTypes.VIEW]: "Просмотр заявителя",
+    [ModalTypes.ADD]: "Добавление калибра",
+    [ModalTypes.EDIT]: "Редактирование калибра",
+    [ModalTypes.VIEW]: "Просмотр калибра",
     [ModalTypes.DELETE]: "",
   };
 
@@ -34,13 +34,13 @@ export const ApplicantPage = () => {
         renderHeader={(table) => <HeaderActions table={table} />}
       />
       <MainModal
-        formId="applicant-form"
+        formId="caliber-form"
         titleMap={titleMap}
-        entityName={"заявителя"}
+        entityName={"калибр"}
         FormComponent={
-          <ApplicationForm
+          <CaliberForm
             defaultValues={selectedItem ?? {}}
-            formId="applicant-form"
+            formId="caliber-form"
           />
         }
       />
