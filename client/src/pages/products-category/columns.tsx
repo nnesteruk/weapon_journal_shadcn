@@ -5,12 +5,12 @@ import {
 import { Checkbox } from "@/shared/ui";
 import type { ColumnDef } from "@tanstack/react-table";
 
-type ProductsType = {
-  id: string;
+type ProductsCategory = {
+  id: number;
   name: string;
 };
 
-export const columns: ColumnDef<ProductsType>[] = [
+export const columns: ColumnDef<ProductsCategory>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -40,12 +40,18 @@ export const columns: ColumnDef<ProductsType>[] = [
     header: (info) => <DataTableColumnHeader info={info} name="Категория" />,
   },
   {
+    accessorKey: "productType",
+    header: (info) => (
+      <DataTableColumnHeader info={info} name="Вид продукции" />
+    ),
+  },
+  {
     id: "actions",
 
     cell: ({ row }) => {
-      const productsType = row.original;
+      const category = row.original;
 
-      return <DataTableRowActions row={productsType} />;
+      return <DataTableRowActions row={category} />;
     },
   },
 ];

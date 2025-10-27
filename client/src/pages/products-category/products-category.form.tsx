@@ -60,11 +60,11 @@ export const ProductsCategoryForm = ({
             rules={{ required: true }}
             render={({ field }) => (
               <FormItem className="flex">
-                <FormLabel>Тип продукции</FormLabel>
+                <FormLabel>Вид продукции</FormLabel>
                 <FormControl>
                   <Select>
                     <SelectTrigger>
-                      <SelectValue placeholder="Тип продукции" />
+                      <SelectValue placeholder="Вид продукции" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
